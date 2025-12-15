@@ -4,7 +4,7 @@ import Combine
 
 @MainActor
 final class HomeViewModel: ObservableObject {
-    @Published var recentTracks: [SpotifyTrack] = []
+    @Published var recentTracks: [Music] = []   // 🔄 Agora usa seu modelo Music
     @Published var errorMessage: String?
     @Published var isLoading = false
     
@@ -16,7 +16,7 @@ final class HomeViewModel: ObservableObject {
     }
 
     func load() async {
-        // Debug: verificar token
+        // Verificar se há token
         guard let token = TokenManager.shared.getToken() else {
             print("❌ Nenhum token encontrado!")
             errorMessage = "Token não encontrado. Faça login novamente."
@@ -30,8 +30,9 @@ final class HomeViewModel: ObservableObject {
         errorMessage = nil
         
         do {
-            recentTracks = try await spotifyService.fetchRecentlyPlayed()
-            print("✅ \(recentTracks.count) músicas carregadas")
+            // 🔄 Usa nova função e modelo
+            recentTracks = try await spotifyService.fetchRecentlyPlayedToday()
+            print("✅ \(recentTracks.count) músicas carregadas hoje")
         } catch SpotifyError.unauthorized {
             print("❌ Token expirado")
             errorMessage = "Token expirado. Faça login novamente."

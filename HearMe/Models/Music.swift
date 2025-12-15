@@ -6,4 +6,5 @@ struct Music: Identifiable {
     let artistName: String
     let albumName: String
     let albumArtURL: String?
+    let playedAt: Date
 }
