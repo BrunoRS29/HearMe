@@ -1,16 +1,27 @@
-import UIKit
 import SwiftUI
+import Combine
 
-final class AppCoordinator {
-    private let navigationController: UINavigationController
-
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+@MainActor
+final class AppCoordinator: ObservableObject {
+    @Published var isLoggedIn = false
+    
+    init() {
+        // Verificar se tem token ao iniciar
+        checkAuthStatus()
     }
-
-    func start() {
-        // Por enquanto, vai direto para a Home
-        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
-        homeCoordinator.start()
+    
+    func checkAuthStatus() {
+        isLoggedIn = TokenManager.shared.hasValidToken()
+        print("🔐 Status de autenticação: \(isLoggedIn ? "Logado" : "Deslogado")")
+    }
+    
+    func showHome() {
+        isLoggedIn = true
+    }
+    
+    func logout() {
+        TokenManager.shared.clearToken()
+        isLoggedIn = false
+        print("👋 Logout realizado")
     }
 }

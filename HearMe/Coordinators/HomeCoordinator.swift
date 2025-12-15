@@ -1,17 +1,19 @@
-import UIKit
 import SwiftUI
 
-final class HomeCoordinator {
-    private let navigationController: UINavigationController
-
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+@MainActor
+final class HomeCoordinator: Coordinator {
+    private let appCoordinator: AppCoordinator
+    
+    init(appCoordinator: AppCoordinator) {
+        self.appCoordinator = appCoordinator
     }
-
-    func start() {
-        let viewModel = HomeViewModel()
-        let view = HomeView(viewModel: viewModel)
-        let vc = UIHostingController(rootView: view)
-        navigationController.pushViewController(vc, animated: false)
+    
+    func start() -> some View {
+        let viewModel = HomeViewModel(coordinator: self)
+        return HomeView(viewModel: viewModel)
+    }
+    
+    func logout() {
+        appCoordinator.logout()
     }
 }

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7419C3B22EF03B65005CA63E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7419C3B12EF03B5D005CA63E /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		7493ECFA2EEC45A800081F0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +28,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7419C3B12EF03B5D005CA63E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7493ECEC2EEC45A600081F0B /* HearMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7493ECF92EEC45A800081F0B /* HearMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HearMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7493ED032EEC45A800081F0B /* HearMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HearMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7493ED7E2EEC5C4900081F0B /* Exceptions for "HearMe" folder in "HearMe" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 7493ECEB2EEC45A600081F0B /* HearMe */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7493ECEE2EEC45A600081F0B /* HearMe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7493ED7E2EEC5C4900081F0B /* Exceptions for "HearMe" folder in "HearMe" target */,
+			);
 			path = HearMe;
 			sourceTree = "<group>";
 		};
@@ -75,6 +93,7 @@
 		7493ECE32EEC45A600081F0B = {
 			isa = PBXGroup;
 			children = (
+				7419C3B12EF03B5D005CA63E /* README.md */,
 				7493ECEE2EEC45A600081F0B /* HearMe */,
 				7493ECFC2EEC45A800081F0B /* HearMeTests */,
 				7493ED062EEC45A800081F0B /* HearMeUITests */,
@@ -212,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7419C3B22EF03B65005CA63E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +417,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HearMe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +449,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HearMe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
