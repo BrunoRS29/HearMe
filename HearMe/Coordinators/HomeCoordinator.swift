@@ -16,4 +16,7 @@ final class HomeCoordinator: Coordinator {
     func logout() {
         appCoordinator.logout()
     }
-}
+    
+    func navigateToSoftd() {
+        appCoordinator.showSoftd()
+    }}

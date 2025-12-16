@@ -49,4 +49,8 @@ final class HomeViewModel: ObservableObject {
     func logout() {
         coordinator.logout()
     }
+    
+    func didTapGoToSoftd() {
+            coordinator.navigateToSoftd()
+        }
 }

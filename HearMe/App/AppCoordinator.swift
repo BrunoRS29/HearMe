@@ -4,6 +4,7 @@ import Combine
 @MainActor
 final class AppCoordinator: ObservableObject {
     @Published var isLoggedIn = false
+    @Published var currentView: AnyView? = nil
     
     init() {
         // Verificar se tem token ao iniciar
@@ -23,5 +24,11 @@ final class AppCoordinator: ObservableObject {
         TokenManager.shared.clearToken()
         isLoggedIn = false
         print("👋 Logout realizado")
+    }
+    
+    func showSoftd() {
+        currentView = AnyView(
+            SoftdCoordinator(appCoordinator: self).start()
+        )
     }
 }

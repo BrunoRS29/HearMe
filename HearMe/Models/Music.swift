@@ -7,4 +7,5 @@ struct Music: Identifiable {
     let albumName: String
     let albumArtURL: String?
     let playedAt: Date
+    let isSongOfTheDay: Bool = false
 }
