@@ -12,16 +12,19 @@ struct HearMeApp: App {
         WindowGroup {
             ZStack {
                 if appCoordinator.isLoggedIn {
-                    HomeCoordinator(appCoordinator: appCoordinator)
-                        .start()
+                    // 🔹 se currentView tiver algo, mostre‑a
+                    if let activeView = appCoordinator.currentView {
+                        activeView
+                    } else {
+                        HomeCoordinator(appCoordinator: appCoordinator)
+                            .start()
+                    }
                 } else {
                     LoginCoordinator(appCoordinator: appCoordinator)
                         .start()
                 }
             }
             .onOpenURL { url in
-                print("🔗 onOpenURL CHAMADO!")
-                print("🔗 URL recebida: \(url.absoluteString)")
                 handleIncomingURL(url)
             }
             .onAppear {

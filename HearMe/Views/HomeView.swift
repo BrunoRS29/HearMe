@@ -10,7 +10,7 @@ struct HomeView: View {
                 // 🧱 LISTA de músicas
                 List(viewModel.recentTracks) { track in
                     Button {
-                        viewModel.didTapGoToSoftd()
+                        viewModel.didTapGoToSoftd(for: track)
                     } label: {
                         HStack(spacing: 12) {
                             // Capa do álbum
@@ -40,8 +40,8 @@ struct HomeView: View {
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                                 Text(track.albumName)
-                                    .font(.caption)
-                                    .foregroundStyle(.tertiary)
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
                             }
 
                             Spacer()

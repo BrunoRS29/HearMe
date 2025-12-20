@@ -5,9 +5,10 @@ import Combine
 final class AppCoordinator: ObservableObject {
     @Published var isLoggedIn = false
     @Published var currentView: AnyView? = nil
+    @Published var navigationPath: [AnyView] = []
+    @Published var songOfTheDay: Music?
     
     init() {
-        // Verificar se tem token ao iniciar
         checkAuthStatus()
     }
     
@@ -26,9 +27,18 @@ final class AppCoordinator: ObservableObject {
         print("👋 Logout realizado")
     }
     
-    func showSoftd() {
-        currentView = AnyView(
-            SoftdCoordinator(appCoordinator: self).start()
-        )
+    // Agora recebe um `Music`
+    func showSoftd(with track: Music) {
+        print("➡️ AppCoordinator.showSoftd chamado para \(track.trackName)")
+        let coordinator = SoftdCoordinator(appCoordinator: self, track: track)
+        currentView = AnyView(coordinator.start())
+        print("📱 currentView atribuído")
     }
+    
+    func showLogin() {
+        let loginCoordinator = LoginCoordinator(appCoordinator: self)
+        let loginView = loginCoordinator.start()
+        navigationPath = [AnyView(loginView)]
+    }
+    
 }
