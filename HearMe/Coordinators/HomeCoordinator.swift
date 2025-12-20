@@ -2,18 +2,25 @@ import SwiftUI
 
 @MainActor
 final class HomeCoordinator: Coordinator {
+    typealias Body = HomeView
     private let appCoordinator: AppCoordinator
-    
+
     init(appCoordinator: AppCoordinator) {
         self.appCoordinator = appCoordinator
     }
-    
-    func start() -> some View {
+
+    @ViewBuilder
+    func start() -> HomeView {
         let viewModel = HomeViewModel(coordinator: self)
-        return HomeView(viewModel: viewModel)
+        HomeView(viewModel: viewModel)
     }
-    
+
+    func navigateToSoftd(with track: Music) {
+        appCoordinator.showSoftd(with: track)
+    }
+
     func logout() {
-        appCoordinator.logout()
+        appCoordinator.navigationPath.removeAll()
+        appCoordinator.showLogin()
     }
 }

@@ -49,4 +49,9 @@ final class HomeViewModel: ObservableObject {
     func logout() {
         coordinator.logout()
     }
+    
+    func didTapGoToSoftd(for track: Music) {
+        print("🎵 didTapGoToSoftd chamado para \(track.trackName)")
+        coordinator.navigateToSoftd(with: track)
+    }
 }
