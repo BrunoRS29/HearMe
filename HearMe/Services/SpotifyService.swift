@@ -92,7 +92,8 @@ struct SpotifyPlayedItem: Codable {
             artistName: track.artists.first?.name ?? "",
             albumName: track.album.name,
             albumArtURL: track.album.images.first?.url,
-            playedAt: played_at
+            playedAt: played_at,
+            spotifyURL: track.external_urls["spotify"]
         )
     }
 }
@@ -101,6 +102,7 @@ struct SpotifyTrackItem: Codable {
     let name: String
     let album: SpotifyAlbum
     let artists: [SpotifyArtist]
+    let external_urls: [String:String]
 }
 
 struct SpotifyArtist: Codable {

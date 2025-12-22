@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
-    @State private var selectedTab = 1 // 1 = histórico selecionado (por padrão)
+    @State private var selectedTab = 1 // aba padrão (histórico)
 
     var body: some View {
         NavigationStack {
@@ -13,7 +13,7 @@ struct HomeView: View {
                         viewModel.didTapGoToSoftd(for: track)
                     } label: {
                         HStack(spacing: 12) {
-                            // Capa do álbum
+                            // capa do álbum
                             if let urlString = track.albumArtURL,
                                let url = URL(string: urlString) {
                                 AsyncImage(url: url) { image in
@@ -32,7 +32,7 @@ struct HomeView: View {
                                     .cornerRadius(8)
                             }
 
-                            // Informações da música
+                            // infos da música
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(track.trackName)
                                     .font(.headline)
@@ -58,6 +58,11 @@ struct HomeView: View {
                 .navigationTitle("Histórico de músicas do dia")
                 .toolbarTitleDisplayMode(.large)
 
+                // 🔄 PUXAR PARA ATUALIZAR
+                .refreshable {
+                    await viewModel.load() // recarrega os dados
+                }
+
                 // 🧭 BOTTOM NAVBAR
                 BottomNavigationBar(
                     selectedIndex: selectedTab,
@@ -69,7 +74,7 @@ struct HomeView: View {
             }
         }
         .task {
-            await viewModel.load()
+            await viewModel.load() // chamada inicial
         }
         .onAppear {
             UINavigationBar.appearance().largeTitleTextAttributes = [
@@ -79,13 +84,14 @@ struct HomeView: View {
     }
 }
 
+// MARK: - Preview
 extension HomeViewModel {
     static var preview: HomeViewModel {
         let appCoordinator = AppCoordinator()
         let homeCoordinator = HomeCoordinator(appCoordinator: appCoordinator)
-        let viewModel = HomeViewModel(coordinator: homeCoordinator)
-        
-        viewModel.recentTracks = [
+        let vm = HomeViewModel(coordinator: homeCoordinator)
+
+        vm.recentTracks = [
             Music(
                 trackName: "Bohemian Rhapsody",
                 artistName: "Queen",
@@ -115,8 +121,8 @@ extension HomeViewModel {
                 playedAt: Date().addingTimeInterval(-3600)
             )
         ]
-        
-        return viewModel
+
+        return vm
     }
 }
 

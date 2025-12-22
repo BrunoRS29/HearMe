@@ -8,4 +8,5 @@ struct Music: Identifiable {
     let albumArtURL: String?
     let playedAt: Date
     var isSongOfTheDay: Bool = false
+    var spotifyURL: String?
 }
