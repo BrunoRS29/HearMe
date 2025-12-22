@@ -73,13 +73,17 @@ struct SoftdView: View {
                 Button {
                     viewModel.setSoftd()
                 } label: {
-                    Text("Definir como música do dia")
-                        .padding()
-                        .background(Color("MainColor"))
-                        .foregroundColor(.black)
-                        .font(.title3.bold())
+                    HStack {
+                        Text("Definir como música do dia")
+                    }
+                    .font(.title3.bold())
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 14)
+                    .background(Color("MainColor"))
+                    .foregroundColor(.black)
+                    .cornerRadius(12)
+                    .shadow(color: Color("MainColor").opacity(0.4), radius: 8, y: 4)
                 }
-                .cornerRadius(10)
                 .padding(.top, 20)
                 .alert(
                     "Já existe uma música do dia!",
@@ -98,8 +102,23 @@ struct SoftdView: View {
                 // 🔹 A partir daqui é fora do botão/alert
                 Spacer()
 
-                Text("Compartilhar com")
-                    .font(.headline)
+                Button {
+                    viewModel.openOnSpotify()
+                } label: {
+                    Label("Ouvir no Spotify", systemImage: "play.circle.fill")
+                        .font(.headline)
+                        .padding(.horizontal, 30)
+                        .padding(.vertical, 14)
+                        .background(Color.black) // fundo preto
+                        .foregroundColor(Color("MainColor")) // texto e ícone verdes
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.green, lineWidth: 2) // borda verde
+                        )
+                        .cornerRadius(12)
+                        .shadow(color: Color("MainColor").opacity(0.4), radius: 8, y: 4) // sombra verde
+                }
+                .padding(.bottom, 16)
 
                 HStack {
                     // por enquanto vazio

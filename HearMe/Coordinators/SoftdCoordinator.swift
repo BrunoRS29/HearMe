@@ -2,6 +2,8 @@ final class SoftdCoordinator: Coordinator {
     typealias Body = SoftdView
     private let appCoordinator: AppCoordinator
     private let track: Music
+    
+    private var viewModel: SoftdViewModel?
 
     init(appCoordinator: AppCoordinator, track: Music) {
         self.appCoordinator = appCoordinator
@@ -9,7 +11,13 @@ final class SoftdCoordinator: Coordinator {
     }
 
     func start() -> SoftdView {
+        // cria a instância do view‑model
         let viewModel = SoftdViewModel(coordinator: self, track: track)
+        
+        // guarda essa mesma instância para poder alterar depois
+        self.viewModel = viewModel
+        
+        // devolve a view usando o mesmo objeto
         return SoftdView(viewModel: viewModel)
     }
     
@@ -19,46 +27,46 @@ final class SoftdCoordinator: Coordinator {
     }
 
     func setSoftd(_ newTrack: Music) {
+        // Se não houver música do dia ainda → define
         guard let current = appCoordinator.songOfTheDay else {
             var updated = newTrack
             updated.isSongOfTheDay = true
             appCoordinator.songOfTheDay = updated
-            print("🎶 \(updated.trackName) marcada como Música do Dia")
             appCoordinator.currentView = nil
+            print("🎶 \(updated.trackName) marcada como Música do Dia")
             return
         }
 
-        // se já há outra música marcada no mesmo dia
+        // Se a atual é diferente → dispara alerta
         if current.trackName != newTrack.trackName {
-            // aciona alerta no viewModel
-            if let viewModel = getSoftdViewModel() {
-                viewModel.currentSongOfTheDayName = current.trackName
-                viewModel.showReplaceAlert = true
-            }
+            print("⚠️ já existe música do dia: \(current.trackName)")
+            viewModel?.currentSongOfTheDayName = current.trackName
+            viewModel?.showReplaceAlert = true       // 🔥 ativa o alerta
         }
     }
 
-        private func showReplaceAlert(old: Music, new: Music) {
-            // você pode disparar uma ação de alerta via AppCoordinator
-            // Em app real, isso seria uma chamada para mostrar Alert na UI.
-            // Aqui apenas simula no console:
-            print("""
-            ⚠️ Já existe uma música do dia:
-               \(old.trackName) – \(old.artistName)
-            Deseja substituir por:
-               \(new.trackName) – \(new.artistName)?
-            """)
 
-            // se o usuário confirmar (simulação)
-            var newTrackUpdated = new
-            var oldTrackUpdated = old
-            oldTrackUpdated.isSongOfTheDay = false
-            newTrackUpdated.isSongOfTheDay = true
+    private func showReplaceAlert(old: Music, new: Music) {
+        // você pode disparar uma ação de alerta via AppCoordinator
+        // Em app real, isso seria uma chamada para mostrar Alert na UI.
+        // Aqui apenas simula no console:
+        print("""
+        ⚠️ Já existe uma música do dia:
+           \(old.trackName) – \(old.artistName)
+        Deseja substituir por:
+           \(new.trackName) – \(new.artistName)?
+        """)
 
-            appCoordinator.songOfTheDay = newTrackUpdated
+        // se o usuário confirmar (simulação)
+        var newTrackUpdated = new
+        var oldTrackUpdated = old
+        oldTrackUpdated.isSongOfTheDay = false
+        newTrackUpdated.isSongOfTheDay = true
 
-            print("✅ \(newTrackUpdated.trackName) substituiu \(oldTrackUpdated.trackName) como Música do Dia")
-            appCoordinator.currentView = nil
+        appCoordinator.songOfTheDay = newTrackUpdated
+
+        print("✅ \(newTrackUpdated.trackName) substituiu \(oldTrackUpdated.trackName) como Música do Dia")
+        appCoordinator.currentView = nil
         }
     
     func confirmReplaceSongOfTheDay(_ newTrack: Music) {

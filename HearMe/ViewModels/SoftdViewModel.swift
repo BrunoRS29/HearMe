@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import UIKit
 
 @MainActor
 final class SoftdViewModel: ObservableObject {
@@ -24,6 +25,21 @@ final class SoftdViewModel: ObservableObject {
     
     func confirmReplaceSongOfTheDay() {
         coordinator.confirmReplaceSongOfTheDay(track)
+    }
+    
+    func openOnSpotify() {
+        // se veio um link exato da API, usa ele
+        if let urlString = track.spotifyURL,        // adicione a prop spotifyURL em Music
+           let url = URL(string: urlString) {
+            UIApplication.shared.open(url)
+            return
+        }
+
+        // senão, faz busca pelo nome
+        let query = track.trackName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        if let url = URL(string: "https://open.spotify.com/search/\(query)") {
+            UIApplication.shared.open(url)
+        }
     }
 }
 
