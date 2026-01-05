@@ -18,7 +18,9 @@ final class AppCoordinator: ObservableObject {
     }
     
     func showHome() {
-        isLoggedIn = true
+        print("⬅️ AppCoordinator.showHome chamado – retornando à Home")
+        currentView = nil   // remove a tela atual
+        isLoggedIn = true    // garante que o app continua logado
     }
     
     func logout() {
@@ -39,6 +41,19 @@ final class AppCoordinator: ObservableObject {
         let loginCoordinator = LoginCoordinator(appCoordinator: self)
         let loginView = loginCoordinator.start()
         navigationPath = [AnyView(loginView)]
+    }
+    
+    func showProfile() {
+        print("➡️ AppCoordinator.showProfile chamado")
+        let coordinator = ProfileCoordinator(appCoordinator: self)
+        currentView = AnyView(coordinator.start())
+        print("📱 currentView atribuído com ProfileView")
+    }
+    
+    func showCalendar() {
+       let coordiantor = CalendarCoordinator(appCoordinator: self)
+        currentView = AnyView(coordiantor.start())
+        print("📱 currentView atribuído com CalendarView")
     }
     
 }

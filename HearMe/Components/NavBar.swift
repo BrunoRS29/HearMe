@@ -8,7 +8,7 @@ struct BottomNavigationBar: View {
         HStack {
             BottomItem(
                 icon: "calendar",
-                title: "Início",
+                title: "Calendário",
                 isSelected: selectedIndex == 0,
                 action: { onItemSelected(0) }
             )

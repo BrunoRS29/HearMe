@@ -54,4 +54,13 @@ final class HomeViewModel: ObservableObject {
         print("🎵 didTapGoToSoftd chamado para \(track.trackName)")
         coordinator.navigateToSoftd(with: track)
     }
+    
+    func goToProfile() {
+        coordinator.navigateToProfile()
+    }
+    
+    func goToCalendar() {
+        coordinator.navigateToCalendar()
+    }
+    
 }

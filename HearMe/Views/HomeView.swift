@@ -68,7 +68,19 @@ struct HomeView: View {
                     selectedIndex: selectedTab,
                     onItemSelected: { index in
                         selectedTab = index
-                        print("🟦 Aba selecionada: \(index)")
+
+                        switch index {
+                        case 0:
+                            print("🟢 Navbar ➜ Início selecionado")
+                            viewModel.goToCalendar()
+                        case 1:
+                            print("🟡 Navbar ➜ Histórico selecionado")
+                        case 2:
+                            print("🟣 Navbar ➜ Perfil selecionado")
+                            viewModel.goToProfile()
+                        default:
+                            print("⚪️ Navbar ➜ Índice desconhecido: \(index)")
+                        }
                     }
                 )
             }

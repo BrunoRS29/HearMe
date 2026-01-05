@@ -23,4 +23,14 @@ final class HomeCoordinator: Coordinator {
         appCoordinator.navigationPath.removeAll()
         appCoordinator.showLogin()
     }
+    
+    func navigateToProfile() {
+        appCoordinator.navigationPath.removeAll()
+        appCoordinator.showProfile()
+    }
+    
+    func navigateToCalendar() {
+        appCoordinator.navigationPath.removeAll()
+        appCoordinator.showCalendar()
+    }
 }

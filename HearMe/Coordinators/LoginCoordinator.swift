@@ -1,7 +1,6 @@
 import SwiftUI
 import UIKit
 
-
 @MainActor
 final class LoginCoordinator: Coordinator {
     private let appCoordinator: AppCoordinator

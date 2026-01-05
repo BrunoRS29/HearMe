@@ -69,6 +69,7 @@ struct SoftdView: View {
                 Text(viewModel.track.artistName)
                     .font(.title2)
                     .foregroundStyle(.secondary)
+                    .bold()
 
                 Button {
                     viewModel.setSoftd()
@@ -116,7 +117,7 @@ struct SoftdView: View {
                                 .stroke(Color.green, lineWidth: 2) // borda verde
                         )
                         .cornerRadius(12)
-                        .shadow(color: Color("MainColor").opacity(0.4), radius: 8, y: 4) // sombra verde
+                        .shadow(color: Color("MainColor").opacity(0.4), radius: 2, y: 4) // sombra verde
                 }
                 .padding(.bottom, 16)
 
